@@ -69,5 +69,10 @@ public class Main_Class_Java_Leet_Code_Exercises {
         boolean result3 = solution.isValidAnagram(s1,t1);
         System.out.println("003. Valid Anagram result3 : "+result3);
 
+        //004. Group Anagrams 🔗 https://leetcode.com/problems/group-anagrams/
+        String[] strs = {"eat","tea","tan","ate","nat","bat"};
+        List<List<String>> result5 = solution.groupAnagrams(strs);
+        System.out.println("004. Group Anagrams result5 : "+result5);
+
     }
 }

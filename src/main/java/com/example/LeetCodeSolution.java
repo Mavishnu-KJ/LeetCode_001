@@ -1,8 +1,6 @@
 package com.example;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class LeetCodeSolution {
 
@@ -96,6 +94,56 @@ public class LeetCodeSolution {
         }
 
         return true;
+
+    }
+
+    /*
+    Input: strs = ["eat","tea","tan","ate","nat","bat"]
+    Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+    */
+    public List<List<String>> groupAnagrams(String[] strs){
+
+        Map<String, List<String>> sortedStringToAnagramListMap = new HashMap<>();
+
+        /*
+        Rough
+        str=eat =>
+        sortedString = aet, map aet = {eat}
+        str=tea =>
+        sortedString = aet, map aet = {eat, tea}
+        str=tan =>
+        sortedString = ant, map ant = {tan}
+        str=ate =>
+        sortedString = aet, map aet = {eat, tea, ate}
+        str=nat =>
+        sortedString = ant, map ant = {tan, nat}
+        str=bat =>
+        sortedString = abt, map abt = {bat}
+
+        map [aet = {eat, tea, ate}, ant = {tan, nat}, abt = {bat}]
+        */
+
+        for(String str : strs){
+            char[] strCharArray = str.toCharArray();
+            Arrays.sort(strCharArray);
+            System.out.println("strCharArray is "+Arrays.toString(strCharArray));
+            String sortedString = Arrays.toString(strCharArray); // It works, but, ugly, eg. it will give "[a,e,t]"
+            System.out.println("sortedString is "+sortedString);
+            String sortedKey = new String(strCharArray); // Better than Arrays.toString(), eg. it will give "aet"
+            System.out.println("sortedKey is "+sortedKey);
+            sortedStringToAnagramListMap.computeIfAbsent(sortedKey, k->new ArrayList<>()).add(str);
+        }
+
+        System.out.println("sortedStringToAnagramListMap is "+sortedStringToAnagramListMap);
+
+        ArrayList<List<String>> resultStringList = new ArrayList<>();
+        //ArrayList<List<String>> resultStringList = new ArrayList<>(sortedStringToAnagramListMap.values()); //We can use instead of following commented line approach
+        //resultStringList.addAll(sortedStringToAnagramListMap.values()); //We can use instead of following iteration
+        for(Map.Entry<String, List<String>> entry : sortedStringToAnagramListMap.entrySet()){
+            resultStringList.add(entry.getValue());
+        }
+
+        return resultStringList;
 
     }
 
