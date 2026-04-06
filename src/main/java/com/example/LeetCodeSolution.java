@@ -147,4 +147,85 @@ public class LeetCodeSolution {
 
     }
 
+
+
+    /*
+    Input: nums = [1,2,2,2,2,3,3,4,4,4,4,4,4], k = 2
+    Output: [4,2] or [2,4]
+    */
+    public int[] topKFrequent(int[] nums, int k){
+
+        //HashMap number -> frequency
+        HashMap<Integer, Integer> numberToFrequencyMap = new HashMap<>();
+
+        for (int num : nums) {
+
+            numberToFrequencyMap.put(num,
+                    numberToFrequencyMap.getOrDefault(num, 0) + 1);
+
+        }
+
+        /*
+        Rough
+        numberToFrequencyMap [{1, 1}, {2, 4}, {3, 2}, {4, 6}]
+        worst case nums{1,2,3,4} - So, bucket length can nums.length
+        bucketArray[1] = 1
+        bucketArray[4] = 2
+        bucketArray[2] = 3
+        bucketArray[6] = 4
+
+        bucketArray[1] = 1
+        bucketArray[2] = 3
+        bucketArray[4] = 2
+        bucketArray[6] = 4
+
+        resultArray[0] = 4
+        resultArray[1] = 2
+
+        */
+
+        //Bucket array of List storage (use frequency as bucket index)
+        List<Integer>[] bucketArrayOfList = new List[nums.length + 1];
+
+        //Initialize bucketArrayOfList with empty list must - to avoid nullpointer exception in further steps
+        for(int i=0; i<bucketArrayOfList.length; i++){
+            bucketArrayOfList[i] = new ArrayList<>(); //Creating empty ArrayList
+        }
+
+        //Use frequency as bucketArrayOfList index and add frequency in the list
+        for(int number : numberToFrequencyMap.keySet()){
+
+            int frequency = numberToFrequencyMap.get(number);
+            bucketArrayOfList[frequency].add(number);
+
+        }
+
+        //result array, traverse the bucketArrayOfList and populate resultArray
+        int[] resultArray = new int[k];
+
+        //Frequency 0 is meaningless here (no number can have frequency 0). It should be frequency >= 1
+        for(int frequency=bucketArrayOfList.length-1, target=0; frequency>=1 && target<k; frequency--){
+
+            List<Integer> list = bucketArrayOfList[frequency];
+            for(int i=0; i<list.size() && target<k; i++){
+                int value = list.get(i); //What if the list is empty here ? I will get value
+                System.out.println("value is "+value);
+                resultArray[target] = value;
+                target++;
+            }
+        }
+
+        return resultArray;
+
+    }
+
+
+
+
+
+
+
+
+
+
 }

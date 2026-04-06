@@ -71,8 +71,16 @@ public class Main_Class_Java_Leet_Code_Exercises {
 
         //004. Group Anagrams 🔗 https://leetcode.com/problems/group-anagrams/
         String[] strs = {"eat","tea","tan","ate","nat","bat"};
-        List<List<String>> result5 = solution.groupAnagrams(strs);
-        System.out.println("004. Group Anagrams result5 : "+result5);
+        List<List<String>> result4 = solution.groupAnagrams(strs);
+        System.out.println("004. Group Anagrams result5 : "+result4);
+
+        //005. Top K Frequent Elements 🔗 https://leetcode.com/problems/top-k-frequent-elements/
+        int[] nums2 = {1,2,1,2,1,2,3,1,3,2};
+        int target1 = 2;
+        int[] result5 = solution.topKFrequent(nums2, target1);
+        System.out.println("005. Top K Frequent Elements result5 : "+Arrays.toString(result5));
+
+
 
     }
 }
