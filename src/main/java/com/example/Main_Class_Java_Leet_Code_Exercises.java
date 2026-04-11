@@ -80,6 +80,78 @@ public class Main_Class_Java_Leet_Code_Exercises {
         int[] result5 = solution.topKFrequent(nums2, target1);
         System.out.println("005. Top K Frequent Elements result5 : "+Arrays.toString(result5));
 
+        //006. Product of Array Except Self 🔗 https://leetcode.com/problems/product-of-array-except-self/
+        /*
+        Example 1:
+        Input: nums = [1,2,3,4]
+        Output: [24,12,8,6]
+        */
+
+        int[] nums3 = {1,2,3,4};
+        int[] result6 = solution.productExceptSelf(nums3);
+        System.out.println("006. Product of Array Except Self result6 : "+Arrays.toString(result6));
+
+        //007. Valid Sudoku 🔗 https://leetcode.com/problems/valid-sudoku/
+        char[][] board = {
+                {'5','3','.','.','7','.','.','.','.'}
+                ,{'6','.','.','1','9','5','.','.','.'}
+                ,{'.','9','8','.','.','.','.','6','.'}
+                ,{'8','.','.','.','6','.','.','.','3'}
+                ,{'4','.','.','8','.','3','.','.','1'}
+                ,{'7','.','.','.','2','.','.','.','6'}
+                ,{'.','6','.','.','.','.','2','8','.'}
+                ,{'.','.','.','4','1','9','.','.','5'}
+                ,{'.','.','.','.','8','.','.','7','9'}
+        };
+
+        boolean result7 = solution.isValidSudoku(board);
+        System.out.println("007. Valid Sudoku result7 : "+result7);
+
+        char[][] board1 = {
+                {'8','3','.','.','7','.','.','.','.'}
+                ,{'6','.','.','1','9','5','.','.','.'}
+                ,{'.','9','8','.','.','.','.','6','.'}
+                ,{'8','.','.','.','6','.','.','.','3'}
+                ,{'4','.','.','8','.','3','.','.','1'}
+                ,{'7','.','.','.','2','.','.','.','6'}
+                ,{'.','6','.','.','.','.','2','8','.'}
+                ,{'.','.','.','4','1','9','.','.','5'}
+                ,{'.','.','.','.','8','.','.','7','9'}
+        };
+
+        boolean result8 = solution.isValidSudoku(board1);
+        System.out.println("007. Valid Sudoku result8 : "+result8);
+
+        //009. Longest Consecutive Sequence 🔗 https://leetcode.com/problems/longest-consecutive-sequence/
+        /*
+        Example 1:
+        Input: nums = [100,4,200,1,3,2, 7, 8, 9, 55, 56, 57, 58, 59]
+        Output: 5
+        Explanation: The longest consecutive elements sequence is [55, 56, 57, 58, 59]. Therefore its length is 5.
+        */
+        int[] nums4 = {100,4,200,1,3,2, 7, 8, 9, 55, 56, 57, 58, 59};
+        int result9 = solution.longestConsecutive(nums4);
+        System.out.println("009. Longest Consecutive Sequence result9 : "+result9);
+
+        //010. Valid Palindrome 🔗 https://leetcode.com/problems/valid-palindrome/
+        /*
+        Example 1:
+        Input: s = "A man, a plan, a canal: Panama"
+        Output: true
+        Explanation: "amanaplanacanalpanama" is a palindrome.
+        */
+
+        String s2 = "A man a plan a canal Panama";
+        boolean result10 = solution.isPalindrome(s2);
+        System.out.println("010. Valid Palindrome result10 : "+result10);
+
+        String s3 = "race a car";
+        boolean result11 = solution.isPalindrome(s3);
+        System.out.println("010. Valid Palindrome result11 : "+result11);
+
+
+
+
 
 
     }

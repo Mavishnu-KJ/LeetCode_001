@@ -219,6 +219,206 @@ public class LeetCodeSolution {
 
     }
 
+    /*
+    Example 1:
+    Input: nums = [1,2,3,4]
+    Output: [24,12,8,6]
+    */
+    public int[] productExceptSelf(int[] nums){
+
+        int n = nums.length;
+        int[] prefixArray = new int[n];
+        int[] suffixArray = new int[n];
+        int[] productArray = new int[n];
+
+        //prefixArray
+        prefixArray[0] = 1;
+        for(int i=1; i<n; i++){
+            prefixArray[i] = prefixArray[i-1] * nums[i-1];
+        }
+
+        //suffixArray
+        suffixArray[n-1] = 1;
+        for(int i=n-2; i>=0; i--){
+            suffixArray[i] = suffixArray[i+1] * nums[i+1];
+        }
+
+        //productArray
+        for(int i=0; i<n; i++){
+            productArray[i] = prefixArray[i] * suffixArray[i];
+        }
+
+        return productArray;
+
+    }
+
+
+    public boolean isValidSudoku(char[][] board){
+
+        HashSet<Character>[] rowArrayOfSet = new HashSet[9];
+        HashSet<Character>[] colArrayOfSet = new HashSet[9];
+        HashSet<Character>[] boxArrayOfSet = new HashSet[9];
+
+        // Initialize all sets first
+        for (int i = 0; i < 9; i++) {
+            rowArrayOfSet[i] = new HashSet<>();
+            colArrayOfSet[i] = new HashSet<>();
+            boxArrayOfSet[i] = new HashSet<>();
+        }
+
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+
+                //Skip dot cells
+                if(board[i][j] == '.'){
+                    continue;
+                }
+
+                //calculate box index
+                int boxIndex = (i/3)*3 + (j/3);
+
+                //Check row value is not duplicate
+                if(rowArrayOfSet[i].contains(board[i][j])){
+                    return false; //duplicate found
+                }
+
+                //Check col value is not duplicate
+                if(colArrayOfSet[j].contains(board[i][j])){
+                    return false; //duplicate found
+                }
+
+                //Check box has no duplicates
+                if(boxArrayOfSet[boxIndex].contains(board[i][j])){
+                    return false; //duplicate found
+                }
+
+                //Add values to the hashSet
+                rowArrayOfSet[i].add(board[i][j]);
+                colArrayOfSet[j].add(board[i][j]);
+                boxArrayOfSet[boxIndex].add(board[i][j]);
+            }
+        }
+
+        return true; //Valid sudoku
+
+    }
+
+    /*
+    Example 1:
+    Input: nums = [100,4,200,1,3,2, 7, 8, 9, 55, 56, 57, 58, 59]
+    Output: 5
+    Explanation: The longest consecutive elements sequence is [55, 56, 57, 58, 59]. Therefore its length is 5.
+    Algorithm must be O(n)
+    */
+    public int longestConsecutive(int[] nums){
+
+        //Edge cases
+        if(nums == null || nums.length == 0){
+            return 0;
+        }
+
+        Set<Integer> numberSet = new HashSet<>();
+
+        //Populate the numberSet
+        for(int n : nums){
+            numberSet.add(n);
+        }
+
+        /*
+        Rough
+        nums = [100,4,200,1,3,2, 7, 8, 9, 55, 56, 57, 58, 59]
+        num=100 =>
+        currentNum = 100, currentStreak = 1, while failed
+        num=4 => if failed
+        num=200 =>
+        currentNum = 200, currentStreak = 1, while failed
+        num=1 =>
+        currentNum = 1, currentStreak =1,
+        while currentStreak = 4
+        longestStreak = 4
+        num=7 =>
+        currentNum = 7, currentStreak =1,
+        while currentStreak = 3
+        longestStreak = 4
+        num=55 =>
+        currentNum = 55, currentStreak =1,
+        while currentStreak = 5
+        longestStreak = 5
+
+        return 5;
+        */
+
+        int longestStreak = 0;
+        for(int num : nums){
+
+            //Start the streak only if the previous number is not present
+            if(!numberSet.contains(num-1)){
+                int currentNum = num;
+                int currentStreak = 1;
+
+                while(numberSet.contains(currentNum+1)){
+                    currentStreak++;
+                    currentNum++;
+                }
+
+                longestStreak = Math.max(longestStreak, currentStreak);
+
+            }
+
+        }
+
+        return longestStreak;
+
+    }
+
+    /*
+    Example 1:
+    Input: s = "A man, a plan, a canal: Panama"
+    Output: true
+    Explanation: "amanaplanacanalpanama" is a palindrome.
+    */
+    public boolean isPalindrome(String s){
+
+
+
+        /*
+        Rough
+        //race a car, return false;
+        //A man a plan a canal Panama return true; as it wont fall in false
+
+        */
+
+        //Convert into lowercase first
+        s = s.toLowerCase();
+        int stringLength = s.length();
+
+        for(int left=0, right=stringLength-1; left<right && right>=0; left++, right--){
+
+            if(isAlphaNumeric(s.charAt(left)) && isAlphaNumeric(s.charAt(right))
+                && s.charAt(left) != s.charAt(right)){
+                return false; //not palindrome
+            }
+
+        }
+
+        return true; //Palindrome
+
+    }
+
+    //Helper method
+    private boolean isAlphaNumeric(char c){
+        boolean isAphaNumeric = false;
+
+        if(c>='a' && c<='z'
+            || c>='A' && c<='Z'
+            || c>='0' && c<='9'){
+
+            isAphaNumeric = true;
+        }
+
+        return isAphaNumeric;
+
+    }
 
 
 
