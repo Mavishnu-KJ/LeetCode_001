@@ -141,7 +141,7 @@ public class Main_Class_Java_Leet_Code_Exercises {
         Explanation: "amanaplanacanalpanama" is a palindrome.
         */
 
-        String s2 = "A man a plan a canal Panama";
+        String s2 = "A man, a plan, a canal: Panama";
         boolean result10 = solution.isPalindrome(s2);
         System.out.println("010. Valid Palindrome result10 : "+result10);
 
@@ -149,8 +149,22 @@ public class Main_Class_Java_Leet_Code_Exercises {
         boolean result11 = solution.isPalindrome(s3);
         System.out.println("010. Valid Palindrome result11 : "+result11);
 
+        String s4 = "    ";
+        boolean result12 = solution.isPalindrome(s4);
+        System.out.println("010. Valid Palindrome result12 : "+result12);
 
+        //011. Longest Substring Without Repeating Characters 🔗 https://leetcode.com/problems/longest-substring-without-repeating-characters/
+        /*
+        Example
+        Input: s = "pwwkew"
+        Output: 3
+        Explanation: The answer is "wke", with the length of 3.
+        Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+         */
 
+        String s5 = "pwwkew";
+        int result13 = solution.lengthOfLongestSubstring(s5);
+        System.out.println("011. Longest Substring Without Repeating Characters result13 : "+result13);
 
 
 

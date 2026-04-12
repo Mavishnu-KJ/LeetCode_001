@@ -379,25 +379,33 @@ public class LeetCodeSolution {
     */
     public boolean isPalindrome(String s){
 
+        //Edge cases
+        if(s.isBlank()){
+            return true; //Palindrome
+        }
 
+        int left = 0;
+        int right = s.length()-1;
 
-        /*
-        Rough
-        //race a car, return false;
-        //A man a plan a canal Panama return true; as it wont fall in false
+        while(left < right){
 
-        */
-
-        //Convert into lowercase first
-        s = s.toLowerCase();
-        int stringLength = s.length();
-
-        for(int left=0, right=stringLength-1; left<right && right>=0; left++, right--){
-
-            if(isAlphaNumeric(s.charAt(left)) && isAlphaNumeric(s.charAt(right))
-                && s.charAt(left) != s.charAt(right)){
-                return false; //not palindrome
+            //Logic for skipping the punctuations in left
+            while(left<right && !Character.isLetterOrDigit(s.charAt(left))){
+                left++;
             }
+
+            //Logic for skipping the punctuations in right
+            while(left<right && !Character.isLetterOrDigit(s.charAt(right))){
+                right--;
+            }
+
+            //Logic for palindrome check
+            if(left<right && Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))){
+                return false; //Not palindrome
+            }
+
+            left++;
+            right--;
 
         }
 
@@ -405,22 +413,68 @@ public class LeetCodeSolution {
 
     }
 
-    //Helper method
-    private boolean isAlphaNumeric(char c){
-        boolean isAphaNumeric = false;
+    /*
+    Example
+    Input: s = "pwwkew"
+    Output: 3
+    Explanation: The answer is "wke", with the length of 3.
+    Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+     */
+    public int lengthOfLongestSubstring(String s){
 
-        if(c>='a' && c<='z'
-            || c>='A' && c<='Z'
-            || c>='0' && c<='9'){
-
-            isAphaNumeric = true;
+        //Edge cases
+        if(s.isEmpty()){
+            return 0;
         }
 
-        return isAphaNumeric;
+        //Character to its recent index Map
+        Map<Character, Integer> characterToRecentIndexMap = new HashMap<>();
+
+        /*
+        Rough
+        Consider the input "dvdf"
+        dvdf
+        0123
+
+        startIndex=0; longestStreak=0; valid window [startIndex, currentIndex]
+        for loop
+        currentIndex=0 => startIndex=0, d
+        startIndex=0; {d, 0}, currentStreak = 1, longestStreak = 1, d
+        currentIndex=1 => startIndex=0, v
+        startIndex=0; {d,0}, {v,1}, currentStreak = 2, longestStreak =2 , dv
+        currentIndex=2 => startIndex=0, d
+        startIndex=1; {d, 2}, {v, 1}, currentStreak = 2, longestStreak = 2, vd
+        currentIndex=3 => startIndex=1, f
+        startIndex=1, {d, 2}, {v, 1}, {f, 3}, currentStreak = 3, longestStreak = 3, vdf
+
+        return 3
+        */
+
+        //Traverse the String
+        int startIndex = 0;
+        int longestStreak = 0;
+        for(int currentIndex=0; currentIndex<s.length(); currentIndex++){
+
+            if(startIndex < currentIndex
+                && characterToRecentIndexMap.containsKey(s.charAt(currentIndex))){
+
+                startIndex = characterToRecentIndexMap.get(s.charAt(currentIndex)) + 1;
+            }
+
+            //Update the map
+            characterToRecentIndexMap.put(s.charAt(currentIndex), currentIndex);
+
+            int currentStreak = currentIndex - startIndex +1;
+            longestStreak = Math.max(longestStreak, currentStreak);
+
+        }
+
+        return longestStreak;
+
+
+
 
     }
-
-
 
 
 
