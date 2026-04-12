@@ -162,7 +162,7 @@ public class Main_Class_Java_Leet_Code_Exercises {
         Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
          */
 
-        String s5 = "pwwkew";
+        String s5 = "appa";
         int result13 = solution.lengthOfLongestSubstring(s5);
         System.out.println("011. Longest Substring Without Repeating Characters result13 : "+result13);
 

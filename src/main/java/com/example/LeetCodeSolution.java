@@ -448,6 +448,23 @@ public class LeetCodeSolution {
         startIndex=1, {d, 2}, {v, 1}, {f, 3}, currentStreak = 3, longestStreak = 3, vdf
 
         return 3
+
+        consider appa
+        appa
+        0123
+
+        startIndex=0; longestStreak=0; valid window [startIndex, currentIndex]
+
+        for loop
+        currentIndex=0 => startIndex=0, a
+        startIndex=0; {a, 0}, currentStreak = 1, longestStreak = 1, a
+        currentIndex=1 => startIndex=0, p
+        startIndex=0; {a, 0}, {p, 1}, currentStreak = 2, longestStreak = 2, ap
+        currentIndex=2 => startIndex=0, p
+        startIndex=2; {a, 0}, {p, 2], currentStreak = 1, longestStreak = 2, p
+        currentIndex=3 => startIndex=2, a
+        startIndex=2, {a, 3}, {p, 2}, currentStreak = 2, longestStreak = 2, pa
+
         */
 
         //Traverse the String
@@ -455,8 +472,10 @@ public class LeetCodeSolution {
         int longestStreak = 0;
         for(int currentIndex=0; currentIndex<s.length(); currentIndex++){
 
-            if(startIndex < currentIndex
-                && characterToRecentIndexMap.containsKey(s.charAt(currentIndex))){
+            if(
+                characterToRecentIndexMap.containsKey(s.charAt(currentIndex))
+                && characterToRecentIndexMap.get(s.charAt(currentIndex)) >= startIndex //Dont forget this condition. if we dont put this condition, the solution wont work for the input appa
+            ){
 
                 startIndex = characterToRecentIndexMap.get(s.charAt(currentIndex)) + 1;
             }
@@ -470,9 +489,6 @@ public class LeetCodeSolution {
         }
 
         return longestStreak;
-
-
-
 
     }
 
